@@ -1,0 +1,23 @@
+{
+  "name": "etch-a-sketch",
+  "version": "1.0.0",
+  "description": "Etch-a-Sketch for the Odin Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jmsmith1018/Etch-a-Sketch.git"
+  },
+  "author": "Josh Smith",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jmsmith1018/Etch-a-Sketch/issues"
+  },
+  "homepage": "https://github.com/jmsmith1018/Etch-a-Sketch#readme",
+  "devDependencies": {
+    "eslint": "^8.0.0",
+    "prettier": "2.4.1"
+  }
+}
