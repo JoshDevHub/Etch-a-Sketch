@@ -18,8 +18,13 @@ const validateGridSize = (size) => {
   gridSideSize = sizeToCheck % 2 === 0 ? sizeToCheck : sizeToCheck - 1;
 };
 
+const getRandomHSLColor = () => {
+  const randomHue = Math.floor(Math.random() * 360);
+  return `hsl(${randomHue}, 50%, 50%)`;
+}
+
 const itemMouseoverHandler = (event) => {
-  event.target.style['background-color'] = 'gray';
+  event.target.style['background-color'] = getRandomHSLColor();
 };
 
 const createItems = (sideSize) => {
@@ -27,8 +32,9 @@ const createItems = (sideSize) => {
   const itemArray = [];
   for (let i = 0; i < totalItems; i++) {
     let newItem = document.createElement('div');
-    newItem.addEventListener('mouseover', itemMouseoverHandler);
-    // newItem.addEventListener('mouseout', itemMouseoutHandler);
+    newItem.addEventListener('mouseover', itemMouseoverHandler, {
+      once: true
+    });
     newItem.classList.add('grid-container__item');
     itemArray.push(newItem);
   }
