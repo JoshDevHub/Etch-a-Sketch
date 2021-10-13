@@ -4,6 +4,17 @@
   box-sizing: border-box;
 }
 
+html {
+  text-align: center;
+}
+
+/* Reset Button */
+
+.reset-button {
+  padding: 0.5em;
+  font-weight: bold;
+}
+
 /* Grid Styles */
 
 .grid-container {
@@ -11,6 +22,7 @@
   width: 960px;
   height: 960px;
   border: 1px solid red;
+  margin: 1rem auto;
 }
 
 .grid-container__item {
