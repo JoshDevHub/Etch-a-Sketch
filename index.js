@@ -1,6 +1,6 @@
 const gridContainer = document.querySelector('.grid-container');
 
-let gridSize = 16;
+let gridSideSize = 16;
 
 const validateGridSize = (size) => {
   let sizeToCheck = size;
@@ -15,15 +15,11 @@ const validateGridSize = (size) => {
       )
     );
   }
-  gridSize = sizeToCheck % 2 === 0 ? sizeToCheck : sizeToCheck - 1;
+  gridSideSize = sizeToCheck % 2 === 0 ? sizeToCheck : sizeToCheck - 1;
 };
 
 const itemMouseoverHandler = (event) => {
   event.target.style['background-color'] = 'gray';
-};
-
-const itemMouseoutHandler = (event) => {
-  event.target.style['background-color'] = '';
 };
 
 const createItems = (sideSize) => {
@@ -32,7 +28,7 @@ const createItems = (sideSize) => {
   for (let i = 0; i < totalItems; i++) {
     let newItem = document.createElement('div');
     newItem.addEventListener('mouseover', itemMouseoverHandler);
-    newItem.addEventListener('mouseout', itemMouseoutHandler);
+    // newItem.addEventListener('mouseout', itemMouseoutHandler);
     newItem.classList.add('grid-container__item');
     itemArray.push(newItem);
   }
@@ -43,19 +39,19 @@ const populateGrid = (gridItemArray) => {
   for (let i = 0; i < gridItemArray.length; i++) {
     gridContainer.appendChild(gridItemArray[i]);
   }
-  gridContainer.style['grid-template-columns'] = `repeat(${gridSize}, 1fr)`;
+  gridContainer.style['grid-template-columns'] = `repeat(${gridSideSize}, 1fr)`;
 };
 
-const items = createItems(gridSize);
+const items = createItems(gridSideSize);
 populateGrid(items);
 
 const resetButton = document.querySelector('.reset-button');
 
 const resetBtnClickHandler = () => {
   gridContainer.replaceChildren();
-  gridSize = parseInt(prompt('Enter a new size between 16 and 100'));
-  validateGridSize(gridSize);
-  const newItems = createItems(gridSize);
+  const userInput = parseInt(prompt('Enter a new size between 16 and 100'));
+  validateGridSize(userInput);
+  const newItems = createItems(gridSideSize);
   populateGrid(newItems);
 };
 
