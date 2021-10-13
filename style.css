@@ -1,0 +1,18 @@
+/* Universal Styles & Resets */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Grid Styles */
+
+.grid-container {
+  display: grid;
+  width: 800px;
+  height: 800px;
+  border: 1px solid red;
+}
+
+.grid-container__item {
+  border: 1px solid black;
+}
