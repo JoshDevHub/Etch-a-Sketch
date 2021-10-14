@@ -6,7 +6,7 @@ This is a project done as part of [The Odin Project](https://theodinproject.com/
 - [x] Button for random color mode.
 - [x] Allow the user to choose a color.
 - [x] Create different styling for the etch-a-sketch container block. 
-- [ ] Try drawing control knobs?
+- [x] Try drawing control knobs?
 - [ ] Style fonts
 - [ ] Style control button elements
 - [ ] Add erase feature
