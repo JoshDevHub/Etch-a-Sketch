@@ -26,11 +26,13 @@ const getRandomHSLColor = () => {
 let drawColor = 'gray';
 let randomColorMode = false;
 
+const randomColorButton = document.querySelector('.random-mode');
+
 const toggleRandomColorMode = () => {
   randomColorMode = !randomColorMode;
+  randomColorButton.classList.toggle('random-mode--true');
 }
 
-const randomColorButton = document.querySelector('.random-mode');
 randomColorButton.addEventListener('click', toggleRandomColorMode);
 
 const updateColor = (event) => {
