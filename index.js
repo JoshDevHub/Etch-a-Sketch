@@ -23,8 +23,22 @@ const getRandomHSLColor = () => {
   return `hsl(${randomHue}, 50%, 50%)`;
 }
 
+const inputValue = 'hsl(0, 0%, 50%)';
+let randomColorMode = false;
+
+const toggleRandomColorMode = () => {
+  randomColorMode = !randomColorMode;
+}
+
+const randomColorButton = document.querySelector('.random-mode');
+randomColorButton.addEventListener('click', toggleRandomColorMode);
+
 const itemMouseoverHandler = (event) => {
-  event.target.style['background-color'] = getRandomHSLColor();
+  if (randomColorMode) {
+    event.target.style.setProperty('--draw-color', getRandomHSLColor());
+  } else {
+    event.target.style.setProperty('--draw-color', inputValue);
+  }
 };
 
 const createItems = (sideSize) => {
