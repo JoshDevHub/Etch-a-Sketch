@@ -1,5 +1,9 @@
 /* Universal Styles & Resets */
 
+:root {
+  --draw-color: hsl(0, 0%, 100%);
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
 }
@@ -10,21 +14,22 @@ html {
 
 /* Reset Button */
 
-.reset-button {
-  padding: 0.5em;
+button {
   font-weight: bold;
+  padding: 0.5em;
 }
 
 /* Grid Styles */
 
 .grid-container {
-  display: grid;
-  width: 960px;
-  height: 960px;
   border: 1px solid red;
+  display: grid;
+  height: 960px;
   margin: 1rem auto;
+  width: 960px;
 }
 
 .grid-container__item {
+  background-color: var(--draw-color);
   border: 1px solid black;
 }
