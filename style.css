@@ -1,11 +1,11 @@
 /* Universal Styles & Resets */
 
 :root {
-  --draw-color: #808080;
-  --main-bg-color: #02001a;
-  --control-box-color: #633380;
-  --text-color: #e0e1dd;
-  --sketch-box-color: #65010c;
+  --draw-color: hsl(0, 0%, 50%);
+  --knob-color: hsl(318, 48%, 81%);
+  --main-bg-color: hsl(245, 100%, 5%);
+  --secondary-bg-color: hsl(277, 43%, 35%);
+  --text-color: hsl(75, 6%, 87%);
 }
 
 *, *::before, *::after {
@@ -28,7 +28,7 @@ html {
 /* Controls */
 
 .controls {
-  background-color: var(--control-box-color);
+  background-color: var(--secondary-bg-color);
   display: flex;
   flex-flow: column;
   padding: 1rem;
@@ -59,7 +59,7 @@ button {
 /* Canvas Styles */
 
 .sketch-canvas {
-  border: 16px solid #633380;
+  border: 16px solid var(--secondary-bg-color);
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
   display: grid;
@@ -68,7 +68,7 @@ button {
 }
 
 .sketch-canvas__item {
-  background-color: white;
+  background-color: hsl(0, 0%, 100%);
 }
 
 .sketch-canvas__item--drawn {
@@ -81,9 +81,27 @@ button {
 }
 
 .sketch-knobs {
+  background-color: var(--secondary-bg-color);
   border-bottom-left-radius: 16px;
   border-bottom-right-radius: 16px;
-  width: 512px;
+  display: flex;
   height: 75px;
-  background-color: var(--control-box-color);
+  justify-content: space-between;
+  width: 512px;
+}
+
+.knob {
+  background-color: var(--knob-color);
+  border-radius: 50%;
+  box-shadow: 2px 2px 4px 2px hsla(0, 0%, 0%, 0.69);
+  height: 50px;
+  width: 50px;
+}
+
+.knob:first-child {
+  margin-left: 3rem;
+}
+
+.knob:last-child {
+  margin-right: 3rem;
 }
