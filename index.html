@@ -9,15 +9,24 @@
   <title>Etch-A-Sketch</title>
 </head>
 <body>
-  <h1>Etch-a-Sketch</h1>
-  <div class="color-selector">
-    <label for="color">Color</label>
-    <input type="color" name="color" value="#808080">
-  </div>
-  <button class="reset-button">Reset</button>
-  <button class="random-mode">Random Color Mode</button>
-  <div class="grid-container">
-
-  </div>
+  <main>
+    <h1>Etch-a-Sketch</h1>
+    <div class="sketch-app">
+      <div class="controls">
+        <h2>Controls</h2>
+        <div class="controls__color">
+          <label for="color">Color</label>
+          <input type="color" name="color" value="#808080">
+        </div>
+        <button class="controls__reset">Reset Canvas</button>
+        <button class="controls__random-color">Random Color Mode</button>
+      </div>
+      <div class="sketch-container">
+        <div class="sketch-canvas"></div>
+        <div class="sketch-knobs"></div>
+      </div>
+    </div>
+  </main>
+  <footer></footer>
 </body>
 </html>

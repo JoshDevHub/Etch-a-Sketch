@@ -1,7 +1,11 @@
 /* Universal Styles & Resets */
 
 :root {
-  --draw-color: hsl(0, 0%, 100%);
+  --draw-color: #808080;
+  --main-bg-color: #02001a;
+  --control-box-color: #633380;
+  --text-color: #e0e1dd;
+  --sketch-box-color: #65010c;
 }
 
 *, *::before, *::after {
@@ -10,35 +14,76 @@
 
 html {
   text-align: center;
+  background-color: var(--main-bg-color);
+  color: var(--text-color);
+  font-size: 16px;
+}
+
+.sketch-app {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
 }
 
 /* Controls */
 
+.controls {
+  background-color: var(--control-box-color);
+  display: flex;
+  flex-flow: column;
+  padding: 1rem;
+  height: 300px;
+  width: 180px;
+  border-radius: 15px;
+  color: var(--text-color);
+}
+
+h2 {
+  margin-top: 0;
+}
+
 button {
   font-weight: bold;
   padding: 0.5em;
+  display: block;
+  margin-top: 1rem;
 }
 
 .random-mode--true {
   border: 5px solid transparent;
   border-image: linear-gradient(to bottom right, #b827fc 0%, #2c90fc 25%, #b8fd33 50%, #fec837 75%, #fd1892 100%);
   border-image-slice: 1;
+  padding: calc(0.5rem - 5px);
 }
 
-/* Grid Styles */
+/* Canvas Styles */
 
-.grid-container {
-  border: 1px solid red;
+.sketch-canvas {
+  border: 16px solid #633380;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
   display: grid;
-  height: 960px;
-  margin: 1rem auto;
-  width: 960px;
+  height: 512px;
+  width: 512px;
 }
 
-.grid-container__item {
-  border: 1px solid black;
+.sketch-canvas__item {
+  background-color: white;
 }
 
-.grid-container__item--drawn {
+.sketch-canvas__item--drawn {
   background-color: var(--draw-color);
+}
+
+.sketch-container {
+  display: flex;
+  flex-flow: column;
+}
+
+.sketch-knobs {
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  width: 512px;
+  height: 75px;
+  background-color: var(--control-box-color);
 }

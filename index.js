@@ -1,5 +1,5 @@
 // Logic & Event Handlers for Drawing on the Canvas
-const randomColorButton = document.querySelector('.random-mode');
+const randomColorButton = document.querySelector('.controls__random-color');
 const colorInput = document.querySelector('input');
 
 let drawColor = 'gray';
@@ -24,16 +24,16 @@ const getRandomHSLColor = () => {
 
 const drawOnMouseoverHandler = (event) => {
   if (randomColorButton.classList.contains('random-mode--true')) {
-    event.target.classList.add('grid-container__item--drawn');
+    event.target.classList.add('sketch-canvas__item--drawn');
     event.target.style.setProperty('--draw-color', getRandomHSLColor());
   } else {
-    event.target.classList.add('grid-container__item--drawn');
+    event.target.classList.add('sketch-canvas__item--drawn');
     event.target.style.setProperty('--draw-color', drawColor);
   }
 };
 
 // Logic & Event Handlers for Creating and Reseting the Grid
-const gridContainer = document.querySelector('.grid-container');
+const gridContainer = document.querySelector('.sketch-canvas');
 
 const createItems = (sideSize = 16) => {
   const totalItems = sideSize ** 2;
@@ -43,7 +43,7 @@ const createItems = (sideSize = 16) => {
     newItem.addEventListener('mouseover', drawOnMouseoverHandler, {
       once: true,
     });
-    newItem.classList.add('grid-container__item');
+    newItem.classList.add('sketch-canvas__item');
     itemArray.push(newItem);
   }
   return itemArray;
@@ -60,7 +60,7 @@ const populateGrid = (gridItemArray) => {
 const items = createItems();
 populateGrid(items);
 
-const resetButton = document.querySelector('.reset-button');
+const resetButton = document.querySelector('.controls__reset');
 
 const validateGridSize = (size) => {
   let sizeToCheck = parseInt(size);
