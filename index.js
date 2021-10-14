@@ -15,8 +15,11 @@ const toggleRandomColorMode = () => {
 randomColorButton.addEventListener('click', toggleRandomColorMode);
 
 const getRandomHSLColor = () => {
-  const randomHue = Math.floor(Math.random() * 360);
-  return `hsl(${randomHue}, 50%, 50%)`;
+  const getRandomInt = (maxNumber) => Math.floor(Math.random() * maxNumber);
+  const randomHue = getRandomInt(360);
+  const saturation = getRandomInt(100);
+  const lightness = getRandomInt(100);
+  return `hsl(${randomHue}, ${saturation}%, ${lightness}%)`;
 };
 
 const drawOnMouseoverHandler = (event) => {
