@@ -23,7 +23,7 @@ const getRandomHSLColor = () => {
   return `hsl(${randomHue}, 50%, 50%)`;
 }
 
-const inputValue = 'hsl(0, 0%, 50%)';
+let drawColor = 'gray';
 let randomColorMode = false;
 
 const toggleRandomColorMode = () => {
@@ -33,11 +33,20 @@ const toggleRandomColorMode = () => {
 const randomColorButton = document.querySelector('.random-mode');
 randomColorButton.addEventListener('click', toggleRandomColorMode);
 
+const updateColor = (event) => {
+  drawColor = event.srcElement.value;
+}
+
+const colorInput = document.querySelector('input');
+colorInput.addEventListener('change', updateColor);
+
 const itemMouseoverHandler = (event) => {
   if (randomColorMode) {
+    event.target.classList.add('grid-container__item--drawn');
     event.target.style.setProperty('--draw-color', getRandomHSLColor());
   } else {
-    event.target.style.setProperty('--draw-color', inputValue);
+    event.target.classList.add('grid-container__item--drawn')
+    event.target.style.setProperty('--draw-color', drawColor);
   }
 };
 
