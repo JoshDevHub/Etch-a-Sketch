@@ -61,7 +61,7 @@ populateGrid(items);
 const resetButton = document.querySelector('.reset-button');
 
 const validateGridSize = (size) => {
-  let sizeToCheck = size;
+  let sizeToCheck = parseInt(size);
   while (
     !Number.isInteger(sizeToCheck) ||
     sizeToCheck < 16 ||
@@ -77,9 +77,12 @@ const validateGridSize = (size) => {
 };
 
 const resetBtnClickHandler = () => {
-  gridContainer.replaceChildren();
-  const userInput = parseInt(prompt('Enter a new size between 16 and 100'));
+  const userInput = prompt('Enter a new size between 16 and 100');
+
+  // Allows user to cancel reset
+  if (userInput === null) return;
   validateGridSize(userInput);
+  gridContainer.replaceChildren();
   const newItems = createItems(gridSideSize);
   populateGrid(newItems);
 };
