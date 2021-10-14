@@ -32,9 +32,7 @@ const drawOnMouseoverHandler = (event) => {
 // Logic & Event Handlers for Creating and Reseting the Grid
 const gridContainer = document.querySelector('.grid-container');
 
-let gridSideSize = 16;
-
-const createItems = (sideSize) => {
+const createItems = (sideSize = 16) => {
   const totalItems = sideSize ** 2;
   const itemArray = [];
   for (let i = 0; i < totalItems; i++) {
@@ -52,10 +50,11 @@ const populateGrid = (gridItemArray) => {
   for (let i = 0; i < gridItemArray.length; i++) {
     gridContainer.appendChild(gridItemArray[i]);
   }
-  gridContainer.style['grid-template-columns'] = `repeat(${gridSideSize}, 1fr)`;
+  const sideSize = Math.sqrt(gridItemArray.length);
+  gridContainer.style['grid-template-columns'] = `repeat(${sideSize}, 1fr)`;
 };
 
-const items = createItems(gridSideSize);
+const items = createItems();
 populateGrid(items);
 
 const resetButton = document.querySelector('.reset-button');
@@ -73,7 +72,8 @@ const validateGridSize = (size) => {
       )
     );
   }
-  gridSideSize = sizeToCheck % 2 === 0 ? sizeToCheck : sizeToCheck - 1;
+  // Forces the size to an even number so items fit grid nicely
+  return (sizeToCheck % 2 === 0 ? sizeToCheck : sizeToCheck - 1);
 };
 
 const resetBtnClickHandler = () => {
@@ -81,9 +81,10 @@ const resetBtnClickHandler = () => {
 
   // Allows user to cancel reset
   if (userInput === null) return;
-  validateGridSize(userInput);
+
+  const newGridSize = validateGridSize(userInput);
   gridContainer.replaceChildren();
-  const newItems = createItems(gridSideSize);
+  const newItems = createItems(newGridSize);
   populateGrid(newItems);
 };
 
