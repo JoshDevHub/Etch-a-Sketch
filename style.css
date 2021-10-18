@@ -17,12 +17,19 @@ html {
   background-color: var(--main-bg-color);
   color: var(--text-color);
   font-size: 16px;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
 .sketch-app {
   display: flex;
   justify-content: center;
   gap: 4rem;
+}
+
+/* Header */
+
+h1 {
+  font-size: 3rem;
 }
 
 /* Controls */
@@ -104,4 +111,29 @@ button {
 
 .knob:last-child {
   margin-right: 3rem;
+}
+
+/* Footer */
+
+footer {
+  margin-top: 1rem;
+  border-top: 1px solid var(--secondary-bg-color);
+}
+
+.footer-nav {
+  display: flex;
+  list-style-type: none;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.footer-nav a {
+  text-decoration: none;
+  color: var(--text-color);
+  padding: 0.5em;
+  border-radius: 10px;
+}
+
+.footer-nav a:hover {
+  background-color: var(--secondary-bg-color);
 }
