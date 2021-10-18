@@ -4,8 +4,8 @@
   --draw-color: hsl(0, 0%, 50%);
   --knob-color: hsl(318, 48%, 81%);
   --main-bg-color: hsl(245, 100%, 5%);
+  --primary-white: hsl(75, 6%, 87%);
   --secondary-bg-color: hsl(277, 43%, 35%);
-  --text-color: hsl(75, 6%, 87%);
 }
 
 *, *::before, *::after {
@@ -13,17 +13,11 @@
 }
 
 html {
-  text-align: center;
   background-color: var(--main-bg-color);
-  color: var(--text-color);
-  font-size: 16px;
+  color: var(--primary-white);
   font-family: 'Source Sans Pro', sans-serif;
-}
-
-.sketch-app {
-  display: flex;
-  justify-content: center;
-  gap: 4rem;
+  font-size: 16px;
+  text-align: center;
 }
 
 /* Header */
@@ -32,35 +26,71 @@ h1 {
   font-size: 3rem;
 }
 
+/* Sketch App */
+
+.sketch-app {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+}
+
 /* Controls */
 
 .controls {
   background-color: var(--secondary-bg-color);
+  border-radius: 15px;
+  color: var(--primary-white);
   display: flex;
   flex-flow: column;
-  padding: 1rem;
   height: 300px;
+  padding: 1rem;
   width: 180px;
-  border-radius: 15px;
-  color: var(--text-color);
 }
 
 h2 {
   margin-top: 0;
 }
 
-button {
+.controls__color {
+  align-items: center;
+  border-radius: 8px;
+  border: 1px solid var(--primary-white);
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  padding: 0.15em;
+}
+
+.controls__color:hover {
+  background-color: var(--primary-white);
+  color: black;
+  transition: all 0.35s;
+}
+
+.controls__color label {
   font-weight: bold;
-  padding: 0.5em;
+}
+
+button {
+  border-radius: 8px;
+  border: none;
+  color: var(--main-bg-color);
   display: block;
+  font-weight: bold;
   margin-top: 1rem;
+  padding: 0.6em;
+}
+
+button:hover {
+  background-color: var(--main-bg-color);
+  color: var(--primary-white);
+  transition: all 0.35s;
 }
 
 .random-mode--true {
-  border: 5px solid transparent;
-  border-image: linear-gradient(to bottom right, #b827fc 0%, #2c90fc 25%, #b8fd33 50%, #fec837 75%, #fd1892 100%);
-  border-image-slice: 1;
-  padding: calc(0.5rem - 5px);
+  background-color: var(--main-bg-color);
+  color: var(--primary-white);
+  transition: all 0.35s;
 }
 
 /* Canvas Styles */
@@ -129,7 +159,7 @@ footer {
 
 .footer-nav a {
   text-decoration: none;
-  color: var(--text-color);
+  color: var(--primary-white);
   padding: 0.5em;
   border-radius: 10px;
 }
