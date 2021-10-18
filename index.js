@@ -3,13 +3,15 @@ const randomColorButton = document.querySelector('.controls__random-color');
 const colorInput = document.querySelector('input');
 
 let drawColor = 'gray';
+let randomColorMode = false;
 
-const updateColor = (event) => (drawColor = event.srcElement.value);
+const updateDrawColor = (event) => (drawColor = event.srcElement.value);
 
-colorInput.addEventListener('change', updateColor);
+colorInput.addEventListener('change', updateDrawColor);
 
 const toggleRandomColorMode = () => {
   randomColorButton.classList.toggle('random-mode--true');
+  randomColorMode = !randomColorMode;
 };
 
 randomColorButton.addEventListener('click', toggleRandomColorMode);
@@ -17,13 +19,11 @@ randomColorButton.addEventListener('click', toggleRandomColorMode);
 const getRandomHSLColor = () => {
   const getRandomInt = (maxNumber) => Math.floor(Math.random() * maxNumber);
   const randomHue = getRandomInt(360);
-  const saturation = getRandomInt(100);
-  const lightness = getRandomInt(100);
-  return `hsl(${randomHue}, ${saturation}%, ${lightness}%)`;
+  return `hsl(${randomHue}, 50%, 50%)`;
 };
 
 const drawOnMouseoverHandler = (event) => {
-  if (randomColorButton.classList.contains('random-mode--true')) {
+  if (randomColorMode) {
     event.target.classList.add('sketch-canvas__item--drawn');
     event.target.style.setProperty('--draw-color', getRandomHSLColor());
   } else {
@@ -32,29 +32,27 @@ const drawOnMouseoverHandler = (event) => {
   }
 };
 
-// Logic & Event Handlers for Creating and Reseting the Grid
-const gridContainer = document.querySelector('.sketch-canvas');
+// Logic & Event Handlers for Creating and Resetting the Canvas Grid
+const sketchCanvas = document.querySelector('.sketch-canvas');
 
 const createItems = (sideSize = 16) => {
   const totalItems = sideSize ** 2;
-  const itemArray = [];
+  const itemsFragment = new DocumentFragment();
   for (let i = 0; i < totalItems; i++) {
     let newItem = document.createElement('div');
     newItem.addEventListener('mouseover', drawOnMouseoverHandler, {
       once: true,
     });
     newItem.classList.add('sketch-canvas__item');
-    itemArray.push(newItem);
+    itemsFragment.appendChild(newItem);
   }
-  return itemArray;
+  return itemsFragment;
 };
 
-const populateGrid = (gridItemArray) => {
-  for (let i = 0; i < gridItemArray.length; i++) {
-    gridContainer.appendChild(gridItemArray[i]);
-  }
-  const sideSize = Math.sqrt(gridItemArray.length);
-  gridContainer.style['grid-template-columns'] = `repeat(${sideSize}, 1fr)`;
+const populateGrid = (gridFragment) => {
+  const sideLength = Math.sqrt(gridFragment.childElementCount);
+  sketchCanvas.appendChild(gridFragment);
+  sketchCanvas.style['grid-template-columns'] = `repeat(${sideLength}, 1fr)`;
 };
 
 const items = createItems();
@@ -62,31 +60,31 @@ populateGrid(items);
 
 const resetButton = document.querySelector('.controls__reset');
 
+// Keeps user from entering grid designs that look bad or are too resource intensive.
 const validateGridSize = (size) => {
   let sizeToCheck = parseInt(size);
   while (
     !Number.isInteger(sizeToCheck) ||
     sizeToCheck < 16 ||
-    sizeToCheck > 100
+    sizeToCheck > 64
   ) {
     sizeToCheck = parseInt(
       prompt(
-        "You've entered an invalid size. Please enter a value between 16 and 100"
+        "You've entered an invalid size. Please enter a value between 16 and 64"
       )
     );
   }
-  // Forces the size to an even number so items fit grid nicely
-  return (sizeToCheck % 2 === 0 ? sizeToCheck : sizeToCheck - 1);
+  return sizeToCheck;
 };
 
 const resetBtnClickHandler = () => {
-  const userInput = prompt('Enter a new size between 16 and 100');
+  const userInput = prompt('Enter a new size between 16 and 64');
 
   // Allows user to cancel reset
   if (userInput === null) return;
 
   const newGridSize = validateGridSize(userInput);
-  gridContainer.replaceChildren();
+  sketchCanvas.replaceChildren();
   const newItems = createItems(newGridSize);
   populateGrid(newItems);
 };
