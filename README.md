@@ -14,7 +14,6 @@ Built with HTML, CSS, and plain JavaScript.
 
 These are low priority because I want to move on in the curriculum and have fulfilled the assigned objectives in the project, but I may return in the future to make all or some of the following improvements: 
 
-- [ ] Add eraser feature.
 - [ ] Make design responsive and have the app work on mobile and touchscreen devices.
 - [ ] Improve styles in the control box -- particularly getting away from the default styles on the `<input type="color">` element.
 - [ ] Refactor script to use objects and OOP concepts.
