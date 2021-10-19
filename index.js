@@ -1,20 +1,44 @@
-// Logic & Event Handlers for Drawing on the Canvas
+// Logic & Event Handlers for Drawing on the Canvas & Using Controls
 const randomColorButton = document.querySelector('.controls__random-color');
 const colorInput = document.querySelector('input');
+const eraserButton = document.querySelector('.controls__eraser');
 
 let drawColor = 'gray';
 let randomColorMode = false;
+let eraserMode = false;
 
 const updateDrawColor = (event) => (drawColor = event.srcElement.value);
-
 colorInput.addEventListener('change', updateDrawColor);
 
 const toggleRandomColorMode = () => {
   randomColorButton.classList.toggle('random-mode--true');
   randomColorMode = !randomColorMode;
 };
-
 randomColorButton.addEventListener('click', toggleRandomColorMode);
+
+const pencilIconClasses = ['fas', 'fa-pencil-alt'];
+const eraserIconClasses = ['fas', 'fa-eraser'];
+
+const toggleEraserBtnContent = () => {
+  if (eraserMode) {
+    eraserButton.textContent = 'Draw ';
+    const eraserButtonIcon = document.createElement('span');
+    eraserButtonIcon.classList.add(...pencilIconClasses);
+    eraserButton.appendChild(eraserButtonIcon);
+  } else {
+    eraserButton.textContent = 'Eraser ';
+    const eraserButtonIcon = document.createElement('span');
+    eraserButtonIcon.classList.add(...eraserIconClasses);
+    eraserButton.appendChild(eraserButtonIcon);
+  }
+};
+
+const toggleEraserMode = () => {
+  eraserMode = !eraserMode;
+  toggleEraserBtnContent();
+};
+
+eraserButton.addEventListener('click', toggleEraserMode);
 
 const getRandomHSLColor = () => {
   const getRandomInt = (maxNumber) => Math.floor(Math.random() * maxNumber);
@@ -23,12 +47,19 @@ const getRandomHSLColor = () => {
 };
 
 const drawOnMouseoverHandler = (event) => {
+  if (event.target.classList.contains('sketch-canvas__item--drawn')) return;
   if (randomColorMode) {
     event.target.classList.add('sketch-canvas__item--drawn');
     event.target.style.setProperty('--draw-color', getRandomHSLColor());
   } else {
     event.target.classList.add('sketch-canvas__item--drawn');
     event.target.style.setProperty('--draw-color', drawColor);
+  }
+};
+
+const eraseOnMouseoverHandler = (event) => {
+  if (eraserMode) {
+    event.target.classList.remove('sketch-canvas__item--drawn');
   }
 };
 
@@ -40,9 +71,8 @@ const createItems = (sideSize = 16) => {
   const itemsFragment = new DocumentFragment();
   for (let i = 0; i < totalItems; i++) {
     let newItem = document.createElement('div');
-    newItem.addEventListener('mouseover', drawOnMouseoverHandler, {
-      once: true,
-    });
+    newItem.addEventListener('mouseover', drawOnMouseoverHandler);
+    newItem.addEventListener('mouseover', eraseOnMouseoverHandler);
     newItem.classList.add('sketch-canvas__item');
     itemsFragment.appendChild(newItem);
   }
@@ -87,6 +117,7 @@ const resetBtnClickHandler = () => {
   sketchCanvas.replaceChildren();
   const newItems = createItems(newGridSize);
   populateGrid(newItems);
+  toggleEraserMode();
 };
 
 resetButton.addEventListener('click', resetBtnClickHandler);
