@@ -117,7 +117,7 @@ const resetBtnClickHandler = () => {
   sketchCanvas.replaceChildren();
   const newItems = createItems(newGridSize);
   populateGrid(newItems);
-  toggleEraserMode();
+  if (eraserMode) toggleEraserMode();
 };
 
 resetButton.addEventListener('click', resetBtnClickHandler);
